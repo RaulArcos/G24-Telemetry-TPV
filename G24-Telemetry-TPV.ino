@@ -4,8 +4,9 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 
-WifiController wifiController("FormulaGades", "g24evo24");
+WifiController wifiController("CIELO_S", "NAAEE5022041515");
 MQTTController mqttController;
+PubSubClient* mqttClient;
 
 void setup() {
     Serial.begin(115200);
@@ -21,10 +22,15 @@ void setup() {
     //Connect to MQTT
     mqttController.connect();
     Serial.println("G24::MQTTController - Connected to MQTT!");
+    mqttClient = mqttController.get_client();
 }
 
 void loop() {
-    // put your main code here, to run repeatedly:
-    mqttController.publish("G24/Telemetry/TPV", "Hello World!");
-    delay(1000);
+    if (!mqttClient->connected()) {
+        mqttController.connect();
+    }
+    mqttClient->loop();
+    mqttController.publish_status("connected", "acceleration");
+
+    delay(100);
 }
