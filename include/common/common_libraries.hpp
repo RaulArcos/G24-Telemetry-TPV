@@ -5,5 +5,6 @@
 #include "time.h"
 #include <ArduinoJson.h>
 #include <vector>
+#include <map>
 
 #endif

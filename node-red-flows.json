@@ -1,0 +1,808 @@
+[
+    {
+        "id": "0ebe42948baadaa0",
+        "type": "tab",
+        "label": "Flujo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "246890c67aefc6c2",
+        "type": "mqtt in",
+        "z": "0ebe42948baadaa0",
+        "name": "G24 Telemetry",
+        "topic": "g24/telemetry",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "af37689b1c348a3b",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8fd40d19ecaf36b9",
+        "type": "mqtt out",
+        "z": "0ebe42948baadaa0",
+        "name": "G24 TPV SET_MODE",
+        "topic": "G24/tpv/set_mode",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 420,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "935374389758aa6f",
+        "type": "ui_button",
+        "z": "0ebe42948baadaa0",
+        "name": "Acceleration Button",
+        "group": "dashboard_group",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Acceleration",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"mode\":0}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "8fd40d19ecaf36b9"
+            ]
+        ]
+    },
+    {
+        "id": "33e7a3b89f0f0a20",
+        "type": "ui_button",
+        "z": "0ebe42948baadaa0",
+        "name": "Skippad Button",
+        "group": "dashboard_group",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Skippad",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"mode\":1}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 140,
+        "y": 320,
+        "wires": [
+            [
+                "8fd40d19ecaf36b9"
+            ]
+        ]
+    },
+    {
+        "id": "e860ee14e817235d",
+        "type": "ui_button",
+        "z": "0ebe42948baadaa0",
+        "name": "Autocross Button",
+        "group": "dashboard_group",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Autocross",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"mode\":2}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 360,
+        "wires": [
+            [
+                "8fd40d19ecaf36b9"
+            ]
+        ]
+    },
+    {
+        "id": "808a5aef5af36bbe",
+        "type": "ui_button",
+        "z": "0ebe42948baadaa0",
+        "name": "Endurance Button",
+        "group": "dashboard_group",
+        "order": 5,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Endurance",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"mode\":3}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 150,
+        "y": 400,
+        "wires": [
+            [
+                "8fd40d19ecaf36b9"
+            ]
+        ]
+    },
+    {
+        "id": "b5eadd6124e85667",
+        "type": "mqtt in",
+        "z": "0ebe42948baadaa0",
+        "name": "",
+        "topic": "G24/tpv/status",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 130,
+        "y": 620,
+        "wires": [
+            [
+                "5f660efb07dbe923",
+                "6f02220865d37de5"
+            ]
+        ]
+    },
+    {
+        "id": "aa76aa6e2ac25f06",
+        "type": "ui_button",
+        "z": "0ebe42948baadaa0",
+        "name": "Go to Page 2",
+        "group": "dashboard_group",
+        "order": 10,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "Ir a Telemetría",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Telemetría\"}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 810,
+        "y": 440,
+        "wires": [
+            [
+                "53fcb1f451e2cbba"
+            ]
+        ]
+    },
+    {
+        "id": "44f4ca397d577956",
+        "type": "ui_button",
+        "z": "0ebe42948baadaa0",
+        "name": "Go to Page 1",
+        "group": "878ff2569e0c078f",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Ir a TPV",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Tiempo por Vuelta\"}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 810,
+        "y": 540,
+        "wires": [
+            [
+                "53fcb1f451e2cbba"
+            ]
+        ]
+    },
+    {
+        "id": "53fcb1f451e2cbba",
+        "type": "ui_ui_control",
+        "z": "0ebe42948baadaa0",
+        "name": "",
+        "x": 960,
+        "y": 490,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1a697b15fb6b03b",
+        "type": "ui_text",
+        "z": "0ebe42948baadaa0",
+        "group": "dashboard_group",
+        "order": 1,
+        "width": 8,
+        "height": 1,
+        "name": "",
+        "label": "Selección de Modo",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 830,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "0a4935cb7b53ed16",
+        "type": "inject",
+        "z": "0ebe42948baadaa0",
+        "name": "Initial Status",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "{\"status\":\"disconnected\",\"mode\":\"not-selected\"}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 560,
+        "wires": [
+            [
+                "2c7647ed9a4189f5",
+                "c146920a730a51ee",
+                "3cc3bc038babce69"
+            ]
+        ]
+    },
+    {
+        "id": "5f660efb07dbe923",
+        "type": "trigger",
+        "z": "0ebe42948baadaa0",
+        "name": "",
+        "op1": "",
+        "op2": "{\"status\":\"disconnected\",\"mode\":\"not-selected\"}",
+        "op1type": "nul",
+        "op2type": "json",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "",
+        "outputs": 1,
+        "x": 360,
+        "y": 660,
+        "wires": [
+            [
+                "2c7647ed9a4189f5",
+                "c146920a730a51ee",
+                "3cc3bc038babce69"
+            ]
+        ]
+    },
+    {
+        "id": "2c7647ed9a4189f5",
+        "type": "ui_text",
+        "z": "0ebe42948baadaa0",
+        "group": "a9da2a3c274c48b6",
+        "order": 1,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Status: ",
+        "format": "{{msg.payload.status}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 640,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "c146920a730a51ee",
+        "type": "ui_text",
+        "z": "0ebe42948baadaa0",
+        "group": "a9da2a3c274c48b6",
+        "order": 4,
+        "width": 4,
+        "height": 1,
+        "name": "",
+        "label": "Mode:",
+        "format": "{{msg.payload.mode}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 630,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "6f02220865d37de5",
+        "type": "function",
+        "z": "0ebe42948baadaa0",
+        "name": "Satus/Mode Parser",
+        "func": "// Parse the JSON string\nvar payload = JSON.parse(msg.payload);\n\n// Extract status and mode\nvar status = payload.status;\nvar mode = payload.mode;\n\n// Set the new payload\nmsg.payload = {\"status\": status, \"mode\": mode};\n\n// Return the modified message object\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 600,
+        "wires": [
+            [
+                "2c7647ed9a4189f5",
+                "c146920a730a51ee",
+                "3cc3bc038babce69"
+            ]
+        ]
+    },
+    {
+        "id": "3cc3bc038babce69",
+        "type": "function",
+        "z": "0ebe42948baadaa0",
+        "name": "Led Control",
+        "func": "let status = msg.payload.status || \"disconnected\";\nlet mode = msg.payload.mode || \"unknown\";\n\nlet ledColor;\n\nswitch (status) {\n    case \"disconnected\":\n        ledColor = \"grey\";\n        break;\n    case \"connected\":\n        ledColor = \"green\";\n        break;\n    case \"ready\":\n        ledColor = \"blue\";\n        break;\n    case \"working\":\n        ledColor = \"purple\";\n        break;\n    default:\n        ledColor = \"red\";\n}\n\nreturn { payload: ledColor };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\nreturn { payload: \"grey\" };",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 540,
+        "wires": [
+            [
+                "1ee631bdb105cb58"
+            ]
+        ]
+    },
+    {
+        "id": "1ee631bdb105cb58",
+        "type": "ui_led",
+        "z": "0ebe42948baadaa0",
+        "order": 3,
+        "group": "a9da2a3c274c48b6",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#808080",
+                "value": "grey",
+                "valueType": "str"
+            },
+            {
+                "color": "#008000",
+                "value": "green",
+                "valueType": "str"
+            },
+            {
+                "color": "#800080",
+                "value": "purple",
+                "valueType": "str"
+            },
+            {
+                "color": "#ff0000",
+                "value": "red",
+                "valueType": "str"
+            },
+            {
+                "color": "#0000ff",
+                "value": "blue",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 630,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "55ec42d0d035eda8",
+        "type": "ui_button",
+        "z": "0ebe42948baadaa0",
+        "name": "Start Button",
+        "group": "dashboard_group",
+        "order": 6,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Start ",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"start\":true}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 130,
+        "y": 460,
+        "wires": [
+            [
+                "a4f8e76d36f81cba"
+            ]
+        ]
+    },
+    {
+        "id": "fa45c182d7f8cd81",
+        "type": "ui_button",
+        "z": "0ebe42948baadaa0",
+        "name": "Cancel  Button",
+        "group": "dashboard_group",
+        "order": 7,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Stop",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"start\":false}",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 140,
+        "y": 500,
+        "wires": [
+            [
+                "a4f8e76d36f81cba"
+            ]
+        ]
+    },
+    {
+        "id": "a4f8e76d36f81cba",
+        "type": "mqtt out",
+        "z": "0ebe42948baadaa0",
+        "name": "G24 TPV Start",
+        "topic": "G24/tpv/start",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_broker",
+        "x": 380,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "551af3c064570490",
+        "type": "function",
+        "z": "0ebe42948baadaa0",
+        "name": "Add Timestamp",
+        "func": "var payload = JSON.parse(msg.payload); // Parse the incoming JSON string\nvar now = new Date(); // Get the current date and time\npayload.timestamp = now.toLocaleString(); // Add timestamp to the payload in a human-readable format\nmsg.payload = payload; // Update the message payload\n\n// Retrieve the existing messages from the flow context\nvar messages = flow.get('messages') || [];\n\n// Add the new message to the array\nmessages.unshift(payload);\n\n// Limit the number of messages stored\nif (messages.length > 100) {\n    messages.pop();\n}\n\n// Store the updated array in the flow context\nflow.set('messages', messages);\n\nreturn { payload: messages };\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 300,
+        "wires": [
+            [
+                "21bb5fdab32d3aa1"
+            ]
+        ]
+    },
+    {
+        "id": "21bb5fdab32d3aa1",
+        "type": "ui_template",
+        "z": "0ebe42948baadaa0",
+        "group": "a5271c0c0e2321b3",
+        "name": "Display Messages",
+        "order": 1,
+        "width": 10,
+        "height": 12,
+        "format": "<div ng-init=\"msgs=scope.$eval('msg.payload')\">\n    <div ng-repeat=\"msg in msgs\" style=\"border-bottom:1px solid #ddd;padding:5px;\">\n        {{msg.timestamp}}<br><b>{{msg.mode}} - Lap: {{msg.lap}}, Time: {{msg.time}}s</b>\n    </div>\n</div>\n<script>\n    (function(scope) {\n    scope.$watch('msg', function(msg) {\n        if (msg) {\n            scope.msgs = msg.payload;\n        }\n    });\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1040,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "06cb9e8522f9b3cb",
+        "type": "mqtt in",
+        "z": "0ebe42948baadaa0",
+        "name": "",
+        "topic": "G24/tpv/time",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 650,
+        "y": 300,
+        "wires": [
+            [
+                "551af3c064570490"
+            ]
+        ]
+    },
+    {
+        "id": "07f0381f3d987920",
+        "type": "ui_button",
+        "z": "0ebe42948baadaa0",
+        "name": "Clear",
+        "group": "a5271c0c0e2321b3",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Clear",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 630,
+        "y": 360,
+        "wires": [
+            [
+                "1e67fc231df4c5ae"
+            ]
+        ]
+    },
+    {
+        "id": "1e67fc231df4c5ae",
+        "type": "function",
+        "z": "0ebe42948baadaa0",
+        "name": "Clear Messages",
+        "func": "// Clear the messages stored in the flow context\nflow.set('messages', []);\n\n// Return an empty array to clear the display\nreturn { payload: [] };",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 360,
+        "wires": [
+            [
+                "21bb5fdab32d3aa1"
+            ]
+        ]
+    },
+    {
+        "id": "6d456bff281b8030",
+        "type": "ui_spacer",
+        "z": "0ebe42948baadaa0",
+        "name": "spacer",
+        "group": "dashboard_group",
+        "order": 8,
+        "width": 4,
+        "height": 1
+    },
+    {
+        "id": "79bf587fe9e96392",
+        "type": "ui_spacer",
+        "z": "0ebe42948baadaa0",
+        "name": "spacer",
+        "group": "dashboard_group",
+        "order": 9,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "5348a6741d827a65",
+        "type": "ui_spacer",
+        "z": "0ebe42948baadaa0",
+        "name": "spacer",
+        "group": "dashboard_group",
+        "order": 11,
+        "width": 5,
+        "height": 1
+    },
+    {
+        "id": "dffc31442c8606e3",
+        "type": "ui_spacer",
+        "z": "0ebe42948baadaa0",
+        "name": "spacer",
+        "group": "a9da2a3c274c48b6",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "8cac96645c5af781",
+        "type": "ui_spacer",
+        "z": "0ebe42948baadaa0",
+        "name": "spacer",
+        "group": "a9da2a3c274c48b6",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "37a987e46b73f35d",
+        "type": "ui_spacer",
+        "z": "0ebe42948baadaa0",
+        "name": "spacer",
+        "group": "a5271c0c0e2321b3",
+        "order": 2,
+        "width": 8,
+        "height": 1
+    },
+    {
+        "id": "af37689b1c348a3b",
+        "type": "mqtt-broker",
+        "name": "HiveMQTT",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "mqtt_broker",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "dashboard_group",
+        "type": "ui_group",
+        "name": "Acciones",
+        "tab": "dashboard_tab",
+        "order": 1,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "878ff2569e0c078f",
+        "type": "ui_group",
+        "name": "Telemetría en Tiempo Real",
+        "tab": "2f17900bd47b8397",
+        "order": 1,
+        "disp": true,
+        "width": 30,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a9da2a3c274c48b6",
+        "type": "ui_group",
+        "name": "Estado",
+        "tab": "dashboard_tab",
+        "order": 2,
+        "disp": true,
+        "width": 5,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a5271c0c0e2321b3",
+        "type": "ui_group",
+        "name": "Tiempos",
+        "tab": "dashboard_tab",
+        "order": 4,
+        "disp": true,
+        "width": 10,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "dashboard_tab",
+        "type": "ui_tab",
+        "name": "Tiempo por Vuelta",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "2f17900bd47b8397",
+        "type": "ui_tab",
+        "name": "Telemetría",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

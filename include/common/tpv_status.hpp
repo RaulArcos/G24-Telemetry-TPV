@@ -4,7 +4,10 @@
 enum class TPVStatus {
     CONNECTED,
     READY,
-    WORKING,
+    WAITING_CAR,
+    READING,
+    START,
+    STOP
 };
 
 #endif

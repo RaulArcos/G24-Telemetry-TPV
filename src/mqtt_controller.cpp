@@ -7,12 +7,12 @@
 #include "../include/mqtt_controller.hpp"
 #include <ArduinoJson.h>
 
-const char* MQTTController::status_topic = "G24/tpv/status";
-const char* MQTTController::mode_topic = "G24/tpv/set_mode";
-
 MQTTController::MQTTController() {
     _client.setServer(_mqtt_server, _mqtt_port);
-    _client.setCallback(MQTTController::callback);
+}
+
+void MQTTController::set_callback(std::function<void(char*, byte*, unsigned int)> func){
+    _client.setCallback(func);
 }
 
 void MQTTController::connect() {
@@ -25,17 +25,14 @@ void MQTTController::connect() {
             Serial.println("Connected");
 
             _client.subscribe(mode_topic);
+            _client.subscribe(start_topic);
         } else {
             Serial.print("Failed, rc=");
             Serial.print(_client.state());
-            Serial.println(" Waiting 5 seconds");
-            delay(5000);
+            Serial.println(" Waiting 1 seconds");
+            delay(1000);
         }
     }
-}
-
-void MQTTController::publish_telemetry(const char* topic, const char* message) {
-    _client.publish(topic, message);
 }
 
 void MQTTController::publish_status(const char* status, const char* mode) {
@@ -48,36 +45,49 @@ void MQTTController::publish_status(const char* status, const char* mode) {
     _client.publish(status_topic, buffer);
 }
 
-void MQTTController::callback(char* topic, byte* payload, unsigned int length) {
-    Serial.print("Message arrived [");
-    Serial.print(topic);
-    Serial.print("] ");
-    for (int i = 0; i < length; i++) {
-        Serial.print((char)payload[i]);
-    }
-    Serial.println();
-
-    if (strcmp(topic, mode_topic) == 0) {
-        handle_mode_message(payload, length);
-    }
-}
-
-void MQTTController::handle_mode_message(byte* payload, unsigned int length) {
+void MQTTController::publish_time(const char* mode, int lap, const char* time) {
     StaticJsonDocument<200> doc;
-    DeserializationError error = deserializeJson(doc, payload, length);
-    if (error) {
-        Serial.print("deserializeJson() failed: ");
-        Serial.println(error.c_str());
-        return;
-    }
+    doc["mode"] = mode;
+    doc["lap"] = lap;
+    doc["time"] = time;
 
-    int mode = doc["mode"];
-    Serial.print("Mode received: ");
-    Serial.println(mode);
-
-    // Handle the mode change logic here
+    char buffer[256];
+    serializeJson(doc, buffer);
+    _client.publish(time_topic, buffer);
 }
 
 PubSubClient* MQTTController::get_client() {
     return &_client;
+}
+
+const char* MQTTController::toString(TPVMode mode) {
+    switch (mode) {
+        case TPVMode::NOT_SELECTED:
+            return "not-selected";
+        case TPVMode::ACCELERATION:
+            return "acceleration";
+        case TPVMode::SKIDPAD:
+            return "skidpad";
+        case TPVMode::AUTOCROSS:
+            return "autocross";
+        case TPVMode::ENDURANCE:
+            return "endurance";
+        default:
+            return "not-selected";
+    }
+}
+
+const char* MQTTController::toString(TPVStatus status) {
+    switch (status) {
+        case TPVStatus::CONNECTED:
+            return "connected";
+        case TPVStatus::READY:
+            return "ready";
+        case TPVStatus::WAITING_CAR:
+            return "waiting-car";
+        case TPVStatus::READING:
+            return "reading";
+        default:
+            return "connected";
+    }
 }
