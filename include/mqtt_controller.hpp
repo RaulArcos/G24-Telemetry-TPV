@@ -16,6 +16,7 @@ public:
     void set_callback(std::function<void(char*, byte*, unsigned int)> func);
     void publish_status(const char* status, const char* mode);
     void publish_time(const char* mode, int lap, const char* time);
+    void publish_timestamp(unsigned long timestamp);
     PubSubClient* get_client();
 
     const char* toString(TPVMode mode);

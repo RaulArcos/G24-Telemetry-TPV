@@ -14,6 +14,9 @@ Laser::Laser(int pin){
     _pin = pin;
     _lastLaserTime = 0;
     _laserActivated = false;
+}
+
+void Laser::begin(){
     pinMode(_pin, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(_pin), this->on_laser_activated, FALLING);
 }

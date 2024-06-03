@@ -56,6 +56,15 @@ void MQTTController::publish_time(const char* mode, int lap, const char* time) {
     _client.publish(time_topic, buffer);
 }
 
+void MQTTController::publish_timestamp(unsigned long timestamp) {
+    StaticJsonDocument<200> doc;
+    doc["timestamp"] = timestamp;
+
+    char buffer[256];
+    serializeJson(doc, buffer);
+    _client.publish("G24/tpv/test", buffer);
+}
+
 PubSubClient* MQTTController::get_client() {
     return &_client;
 }

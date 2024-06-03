@@ -6,6 +6,7 @@
 #include "common/tpv_status.hpp"
 #include "mqtt_controller.hpp"
 #include "laser.hpp"
+#include <time.h>
 
 class TPVTimer {
 public:
@@ -14,6 +15,7 @@ public:
     void set_mqtt_controller(MQTTController *mqtt_controller);
     void set_mqtt_client(PubSubClient *mqtt_client);
     void set_laser(Laser *laser);
+    unsigned long get_sync_time();
 
     void wait_for_laser();
 

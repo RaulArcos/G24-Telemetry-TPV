@@ -50,7 +50,14 @@ void TPVTimer::wait_for_laser(){
         }
         delay(5);
     }
+    _mqtt_controller->publish_timestamp(get_sync_time());
     _laser->reset_laser();
+}
+
+unsigned long TPVTimer::get_sync_time(){
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
 void TPVTimer::acceleration(){

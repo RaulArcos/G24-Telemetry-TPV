@@ -2,21 +2,17 @@
 #include "include/wifi_controller.hpp"
 #include "include/tpv_timer.hpp"
 #include "include/laser.hpp"
-#include "include/time_sync.hpp"
 #include <time.h>
 
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 
-WifiController wifiController("CIELO_S", "NAAEE5022041515");
+WifiController wifiController("FormulaGades", "g24evo24");
 MQTTController mqttController;
 TPVTimer tpvTimer;
 Laser laser(10);
-TimeSync timeSync;
 
 PubSubClient* mqttClient;
-
-#define LASER_PIN 10
 
 void mqtt_callback(char* topic, byte* payload, unsigned int length){
     Serial.print("Message arrived [");
@@ -38,6 +34,8 @@ void setup() {
     Serial.begin(115200);
     Serial.println("G24::WifiController - Attempting Wifi Conection...");
     
+    laser.begin();
+
     //Connect to WiFi
     if(wifiController.connect()){
         Serial.println("G24::WifiController - Connected to WiFi!");
@@ -45,11 +43,7 @@ void setup() {
         Serial.println("G24::WifiController - Failed to connect to WiFi! Timeout!");
     }
 
-    timeSync.begin();
-
-    while(!timeSync.is_time_synced()){
-        timeSync.sync_time();
-    }
+    configTime(0, 0, "pool.ntp.org");
 
     //Connect to MQTT
     mqttController.set_callback(mqtt_callback);
@@ -67,6 +61,6 @@ void loop() {
     }
     mqttClient->loop();
     mqttController.publish_status(mqttController.toString(tpvTimer.get_status()), mqttController.toString(tpvTimer.get_mode()));
-    Serial.println(timeSync.get_synced_time());
-    delay(1000);
+    configTime(0, 0, "pool.ntp.org");
+    delay(100);
 }
