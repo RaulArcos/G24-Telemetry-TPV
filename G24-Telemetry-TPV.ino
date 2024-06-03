@@ -2,6 +2,8 @@
 #include "include/wifi_controller.hpp"
 #include "include/tpv_timer.hpp"
 #include "include/laser.hpp"
+#include "include/time_sync.hpp"
+#include <time.h>
 
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
@@ -10,6 +12,8 @@ WifiController wifiController("CIELO_S", "NAAEE5022041515");
 MQTTController mqttController;
 TPVTimer tpvTimer;
 Laser laser(10);
+TimeSync timeSync;
+
 PubSubClient* mqttClient;
 
 #define LASER_PIN 10
@@ -41,6 +45,12 @@ void setup() {
         Serial.println("G24::WifiController - Failed to connect to WiFi! Timeout!");
     }
 
+    timeSync.begin();
+
+    while(!timeSync.is_time_synced()){
+        timeSync.sync_time();
+    }
+
     //Connect to MQTT
     mqttController.set_callback(mqtt_callback);
     mqttController.connect();
@@ -57,6 +67,6 @@ void loop() {
     }
     mqttClient->loop();
     mqttController.publish_status(mqttController.toString(tpvTimer.get_status()), mqttController.toString(tpvTimer.get_mode()));
-
-    delay(100);
+    Serial.println(timeSync.get_synced_time());
+    delay(1000);
 }
