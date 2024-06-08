@@ -11,7 +11,7 @@ public:
 private:
     const char* _ssid;
     const char* _password;
-    unsigned long _timeout = 15000;
+    unsigned long _timeout = 5000;
 };
 
 #endif

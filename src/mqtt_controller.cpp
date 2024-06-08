@@ -1,6 +1,6 @@
 /**
  * @file mqtt_controller.cpp
- * @author
+ * @author Raúl Arcos Herrera
  * @brief This file contains the implementation of the MQTT Controller for AWS - G24 Telemetry.
  */
 
@@ -26,6 +26,7 @@ void MQTTController::connect() {
 
             _client.subscribe(mode_topic);
             _client.subscribe(start_topic);
+            _client.subscribe("G24/tpv/test");
         } else {
             Serial.print("Failed, rc=");
             Serial.print(_client.state());
@@ -62,7 +63,7 @@ void MQTTController::publish_timestamp(unsigned long timestamp) {
 
     char buffer[256];
     serializeJson(doc, buffer);
-    _client.publish("G24/tpv/test", buffer);
+    _client.publish("G24/tpv/test2", buffer);
 }
 
 PubSubClient* MQTTController::get_client() {

@@ -5,6 +5,7 @@
 #include "common/tpv_mode.hpp"
 #include "common/tpv_status.hpp"
 #include "mqtt_controller.hpp"
+#include "include/time_sync.hpp"
 #include "laser.hpp"
 #include <time.h>
 
@@ -15,7 +16,8 @@ public:
     void set_mqtt_controller(MQTTController *mqtt_controller);
     void set_mqtt_client(PubSubClient *mqtt_client);
     void set_laser(Laser *laser);
-    unsigned long get_sync_time();
+    void set_time_sync(TimeSync *time_sync);
+    // unsigned long get_sync_time();
 
     void wait_for_laser();
 
@@ -32,6 +34,7 @@ private:
     TPVStatus _status = TPVStatus::CONNECTED;
     MQTTController *_mqtt_controller = nullptr;
     Laser *_laser = nullptr;
+    TimeSync *_time_sync = nullptr;
     PubSubClient *_mqtt_client = nullptr;
 
     std::map<TPVMode, std::function<void()>> _tpvHandlers = {

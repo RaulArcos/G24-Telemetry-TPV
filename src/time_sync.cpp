@@ -7,21 +7,34 @@
 #include "../include/time_sync.hpp"
 
 void TimeSync::begin() {
-    _timeClient.begin();
-    _timeClient.setTimeOffset(0);
     _start_time = millis();
 }
 
-void TimeSync::sync_time() {
-    _timeClient.forceUpdate();
-}
+void TimeSync::trigger(byte* payload, unsigned int length) {
+    char message[length + 1];
+    memcpy(message, payload, length);
+    message[length] = '\0';
+    
+    unsigned long receivedTime = strtoull(message, NULL, 10);
 
-bool TimeSync::is_time_synced() {
-    return _timeClient.update();
+    Serial.println("Received Time: " + String(receivedTime));
+    long external_diff = receivedTime - _recieved_timestamp;
+    long internal_diff = millis() - _last_time;
+
+    Serial.println("External Diff: " + String(external_diff));
+    Serial.println("Internal Diff: " + String(internal_diff));
+
+    if (abs(external_diff - internal_diff) < 5) {
+        Serial.println("Time Synced");
+        _synced_time = receivedTime;
+        _restart_time = millis();
+    }
+    _last_time = millis();
+    _recieved_timestamp = receivedTime;
 }
 
 unsigned long TimeSync::get_synced_time() {
     unsigned long currentMillis = millis();
-    return (currentMillis - _start_time);
+    return _synced_time + (currentMillis - _restart_time);
     
 }

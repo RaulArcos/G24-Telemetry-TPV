@@ -41,24 +41,29 @@ void TPVTimer::set_laser(Laser *laser){
     _laser = laser;
 }
 
+void TPVTimer::set_time_sync(TimeSync *time_sync){
+    _time_sync = time_sync;
+}
+
 void TPVTimer::wait_for_laser(){
+    Serial.println("Waiting for Laser");
     while(!_laser->laser_is_activated()){
         _mqtt_client->loop();
         _mqtt_controller->publish_status(_mqtt_controller->toString(_status), _mqtt_controller->toString(_mode));
         if (_status == TPVStatus::STOP){
             break;
         }
-        delay(5);
+        delay(10);
     }
-    _mqtt_controller->publish_timestamp(get_sync_time());
+    _mqtt_controller->publish_timestamp(_time_sync->get_synced_time());
     _laser->reset_laser();
 }
 
-unsigned long TPVTimer::get_sync_time(){
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
+// unsigned long TPVTimer::get_sync_time(){
+//     struct timeval tv;
+//     gettimeofday(&tv, NULL);
+//     return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+// }
 
 void TPVTimer::acceleration(){
 }

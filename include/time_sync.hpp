@@ -7,16 +7,17 @@
 
 class TimeSync{
     public:
-        TimeSync(): _timeClient(_ntpUDP, "pool.ntp.org") {}
+        TimeSync() = default;
         void begin();
-        void sync_time();
+        void trigger(byte* payload, unsigned int length);
         unsigned long get_synced_time();
-        bool is_time_synced();
-
     private:
         unsigned long _start_time;
-        WiFiUDP _ntpUDP;
-        NTPClient _timeClient;
+        unsigned long _last_time;
+        unsigned long _recieved_timestamp;
+
+        unsigned long _synced_time;
+        unsigned long _restart_time;
 };
 
 #endif
